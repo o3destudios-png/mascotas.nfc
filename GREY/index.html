@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grey · Identificación NFC</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:18px;
+    background:#f4f6f8;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#17202a;
+}
+
+.ficha{
+    max-width:520px;
+    margin:auto;
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(0,0,0,.12);
+    padding-top:20px;
+}
+
+.foto{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    object-position:center 28%;
+    border-radius:50%;
+    display:block;
+    margin:0 auto 10px auto;
+}
+
+.contenido{
+    padding:20px;
+}
+
+h1{
+    margin:0;
+    font-size:34px;
+}
+
+.especie{
+    color:#667085;
+    margin-top:6px;
+}
+
+.caja{
+    background:#f5f6f7;
+    border-radius:14px;
+    padding:16px;
+    margin-top:14px;
+}
+
+.botones{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:16px;
+}
+
+.boton{
+    display:block;
+    padding:15px 10px;
+    border-radius:12px;
+    text-align:center;
+    text-decoration:none;
+    font-weight:bold;
+    border:0;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.oscuro{
+    background:#17202a;
+    color:white;
+}
+
+.claro{
+    background:#edf0f3;
+    color:#17202a;
+}
+
+.gps{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    background:#078b63;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    color:#777;
+    font-size:12px;
+    margin-top:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="ficha">
+
+<img class="foto" src="grey.jpg" alt="Foto de Grey">
+
+<div class="contenido">
+
+<h1>🐾 Grey</h1>
+
+<div class="especie">
+🐕 Especie: perro
+</div>
+
+<div class="caja">
+<strong>📞 Contacto:</strong><br>
+650 519 510
+</div>
+
+<div class="caja">
+💬 Es sociable con gente.<br>
+<strong>⚠️ NO APTA con otros perros ni con gatos.</strong>
+</div>
+
+<div class="botones">
+
+<a class="boton oscuro" href="tel:+34650519510">
+📞 Llamar
+</a>
+
+<a class="boton oscuro"
+href="https://wa.me/34650519510?text=Hola%2C%20he%20encontrado%20a%20Grey.">
+💬 WhatsApp
+</a>
+
+<a class="boton claro" href="sms:+34650519510">
+✉️ SMS
+</a>
+
+<button class="boton claro" onclick="copiarTelefono()">
+📋 Copiar teléfono
+</button>
+
+</div>
+
+<button class="gps" onclick="enviarUbicacion()">
+📍 Enviar ubicación GPS
+</button>
+
+<footer>
+Identificación NFC · O3D Estudios
+</footer>
+
+</div>
+</div>
+
+<script>
+function copiarTelefono(){
+    navigator.clipboard.writeText("650519510");
+    alert("Teléfono copiado");
+}
+
+function enviarUbicacion(){
+    navigator.geolocation.getCurrentPosition(function(pos){
+
+        const mapa =
+        "https://maps.google.com/?q=" +
+        pos.coords.latitude + "," +
+        pos.coords.longitude;
+
+        const mensaje =
+        "Hola, he encontrado a Grey. Mi ubicación es: " + mapa;
+
+        window.location.href =
+        "https://wa.me/34650519510?text=" +
+        encodeURIComponent(mensaje);
+    });
+}
+</script>
+
+</body>
+</html>
