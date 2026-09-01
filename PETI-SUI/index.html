@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Peti Sui · Identificación NFC</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:18px;
+    background:#f4f6f8;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#17202a;
+}
+
+.ficha{
+    max-width:520px;
+    margin:auto;
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(0,0,0,.12);
+}
+
+.foto{
+    width:100%;
+    height:360px;
+    object-fit:cover;
+    display:block;
+}
+
+.contenido{
+    padding:20px;
+}
+
+h1{
+    margin:0;
+    font-size:34px;
+}
+
+.especie{
+    color:#667085;
+    margin-top:6px;
+    margin-bottom:18px;
+}
+
+.info{
+    background:#f7f8fa;
+    border-radius:14px;
+    padding:14px;
+    margin:12px 0;
+    font-size:17px;
+}
+
+.botones{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:16px;
+}
+
+.boton{
+    border:0;
+    border-radius:13px;
+    padding:14px 8px;
+    font-size:15px;
+    font-weight:bold;
+    text-decoration:none;
+    text-align:center;
+    cursor:pointer;
+}
+
+.principal{
+    background:#17202a;
+    color:white;
+}
+
+.secundario{
+    background:#eef1f4;
+    color:#17202a;
+}
+
+.gps{
+    grid-column:1/-1;
+    background:#087f5b;
+    color:white;
+}
+
+#mensaje{
+    display:none;
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:#e9fbf3;
+    font-size:14px;
+}
+
+/* SOS PATITAS */
+
+.sos{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid #ddd;
+}
+
+.boton-sos{
+    width:100%;
+    border:0;
+    padding:0;
+    background:transparent;
+    cursor:pointer;
+}
+
+.boton-sos img{
+    width:100%;
+    display:block;
+    border-radius:18px;
+}
+
+.ayuda{
+    text-align:center;
+    color:#667085;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.contactos-sos{
+    display:none;
+    margin-top:14px;
+    background:#fff5f8;
+    border:1px solid #ffcad8;
+    border-radius:16px;
+    padding:14px;
+}
+
+.contactos-sos h3{
+    margin:0 0 12px;
+    text-align:center;
+}
+
+.sos-contacto{
+    display:block;
+    padding:12px;
+    margin:8px 0;
+    border-radius:11px;
+    background:white;
+    color:#17202a;
+    text-decoration:none;
+    font-weight:bold;
+    border:1px solid #eee;
+}
+
+footer{
+    text-align:center;
+    color:#777;
+    font-size:12px;
+    margin-top:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="ficha">
+
+<img
+    class="foto"
+    src="peti-sui.jpg"
+    alt="Foto de Peti Sui"
+>
+
+<div class="contenido">
+
+<h1>🐾 Peti Sui</h1>
+
+<div class="especie">
+🐕 Especie: perro
+</div>
+
+<div class="info">
+<strong>📞 Contacto:</strong><br>
+687 786 125
+</div>
+
+<div class="info">
+💬 Es muy buena, sociable y sin miedo.
+</div>
+
+
+<div class="botones">
+
+<a
+class="boton principal"
+href="tel:+34687786125">
+📞 Llamar
+</a>
+
+<a
+class="boton principal"
+href="https://wa.me/34687786125?text=Hola%2C%20he%20encontrado%20a%20Peti%20Sui."
+target="_blank">
+💬 WhatsApp
+</a>
+
+<a
+class="boton secundario"
+href="sms:+34687786125?body=Hola%2C%20he%20encontrado%20a%20Peti%20Sui.">
+✉️ SMS
+</a>
+
+<button
+class="boton secundario"
+onclick="copiarTelefono()">
+📋 Copiar teléfono
+</button>
+
+<button
+class="boton gps"
+onclick="enviarGPS()">
+📍 Enviar ubicación GPS
+</button>
+
+</div>
+
+
+<div id="mensaje"></div>
+
+
+<div class="sos">
+
+<button
+class="boton-sos"
+onclick="mostrarSOS()">
+
+<img
+src="../assets/sos-patitas-boton.png"
+alt="SOS Patitas Ilicitanas">
+
+</button>
+
+<div class="ayuda">
+🐾 Protectora colaboradora · Pulsa para contactar
+</div>
+
+
+<div
+id="contactosSOS"
+class="contactos-sos">
+
+<h3>🐾 SOS Patitas Ilicitanas</h3>
+
+<a
+class="sos-contacto"
+href="tel:+34651805369">
+📞 Estrella · 651 80 53 69
+</a>
+
+<a
+class="sos-contacto"
+href="tel:+34622684584">
+📞 Laura · 622 68 45 84
+</a>
+
+<a
+class="sos-contacto"
+href="mailto:sospatitasilicitanas@hotmail.com">
+✉️ sospatitasilicitanas@hotmail.com
+</a>
+
+<a
+class="sos-contacto"
+href="https://www.teaming.net/sospatitasilicitanas"
+target="_blank">
+🔗 Teaming SOS Patitas Ilicitanas
+</a>
+
+</div>
+
+</div>
+
+
+<footer>
+Identificación NFC · O3D Estudios
+</footer>
+
+</div>
+</div>
+
+
+<script>
+
+const NOMBRE = "Peti Sui";
+const TELEFONO = "34687786125";
+
+
+function mensaje(texto){
+
+    const caja =
+    document.getElementById("mensaje");
+
+    caja.innerText = texto;
+    caja.style.display = "block";
+}
+
+
+async function copiarTelefono(){
+
+    try{
+
+        await navigator.clipboard.writeText(
+        "+34 687 786 125"
+        );
+
+        mensaje("✅ Teléfono copiado");
+
+    }catch{
+
+        mensaje(
+        "📞 +34 687 786 125"
+        );
+    }
+}
+
+
+function enviarGPS(){
+
+    if(!navigator.geolocation){
+
+        mensaje(
+        "Este móvil no permite obtener la ubicación."
+        );
+
+        return;
+    }
+
+
+    mensaje(
+    "📍 Solicitando permiso de ubicación..."
+    );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+    function(posicion){
+
+        const lat =
+        posicion.coords.latitude;
+
+        const lon =
+        posicion.coords.longitude;
+
+
+        const mapa =
+        "https://maps.google.com/?q="
+        + lat + "," + lon;
+
+
+        const texto =
+        encodeURIComponent(
+        "Hola, he encontrado a "
+        + NOMBRE +
+        ". Mi ubicación es: "
+        + mapa
+        );
+
+
+        window.location.href =
+        "https://wa.me/"
+        + TELEFONO +
+        "?text="
+        + texto;
+    },
+
+
+    function(){
+
+        mensaje(
+        "⚠️ No se pudo obtener la ubicación. Autoriza el GPS del navegador."
+        );
+    },
+
+
+    {
+        enableHighAccuracy:true,
+        timeout:12000,
+        maximumAge:30000
+    });
+
+}
+
+
+function mostrarSOS(){
+
+    const caja =
+    document.getElementById(
+    "contactosSOS"
+    );
+
+    if(caja.style.display === "block"){
+
+        caja.style.display = "none";
+
+    }else{
+
+        caja.style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
