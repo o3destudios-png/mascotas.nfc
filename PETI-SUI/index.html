@@ -174,10 +174,9 @@ footer{
 <div class="ficha">
 
 <img
-    class="foto"
-    src="peti_sui_nueva.jpg"
-    alt="Foto de Peti Sui"
->
+class="foto"
+src="peti_sui_nueva.jpg"
+alt="Foto de Peti Sui">
 
 <div class="contenido">
 
@@ -196,7 +195,6 @@ footer{
 💬 Es muy buena, sociable y sin miedo.
 </div>
 
-
 <div class="botones">
 
 <a
@@ -214,7 +212,7 @@ target="_blank">
 
 <a
 class="boton secundario"
-href="sms:+34687786125?body=Hola%2C%20he%20encontrado%20a%20Peti%20Sui.%20He%20accedido%20a%20sus%20datos%20mediante%20su%20identificacion%20NFC.%20Me%20pongo%20en%20contacto%20contigo%20para%20ayudarte%20a%20recuperarlo."
+href="sms:+34687786125?body=Hola%2C%20he%20encontrado%20a%20Peti%20Sui.%20He%20accedido%20a%20sus%20datos%20mediante%20su%20identificacion%20NFC.%20Me%20pongo%20en%20contacto%20contigo%20para%20ayudarte%20a%20recuperarlo.">
 ✉️ SMS
 </a>
 
@@ -232,9 +230,7 @@ onclick="enviarGPS()">
 
 </div>
 
-
 <div id="mensaje"></div>
-
 
 <div class="sos">
 
@@ -251,7 +247,6 @@ alt="SOS Patitas Ilicitanas">
 <div class="ayuda">
 🐾 Protectora colaboradora · Pulsa para contactar
 </div>
-
 
 <div
 id="contactosSOS"
@@ -288,7 +283,6 @@ target="_blank">
 
 </div>
 
-
 <footer>
 Identificación NFC · O3D Estudios
 </footer>
@@ -296,99 +290,64 @@ Identificación NFC · O3D Estudios
 </div>
 </div>
 
-
 <script>
 
 const NOMBRE = "Peti Sui";
 const TELEFONO = "34687786125";
 
-
 function mensaje(texto){
-
-    const caja =
-    document.getElementById("mensaje");
-
+    const caja = document.getElementById("mensaje");
     caja.innerText = texto;
     caja.style.display = "block";
 }
 
-
 async function copiarTelefono(){
 
     try{
-
-        await navigator.clipboard.writeText(
-        "+34 687 786 125"
-        );
-
+        await navigator.clipboard.writeText("+34 687 786 125");
         mensaje("✅ Teléfono copiado");
-
     }catch{
-
-        mensaje(
-        "📞 +34 687 786 125"
-        );
+        mensaje("📞 +34 687 786 125");
     }
 }
-
 
 function enviarGPS(){
 
     if(!navigator.geolocation){
-
-        mensaje(
-        "Este móvil no permite obtener la ubicación."
-        );
-
+        mensaje("Este móvil no permite obtener la ubicación.");
         return;
     }
 
-
-    mensaje(
-    "📍 Solicitando permiso de ubicación..."
-    );
-
+    mensaje("📍 Solicitando permiso de ubicación...");
 
     navigator.geolocation.getCurrentPosition(
 
     function(posicion){
 
-        const lat =
-        posicion.coords.latitude;
-
-        const lon =
-        posicion.coords.longitude;
-
+        const lat = posicion.coords.latitude;
+        const lon = posicion.coords.longitude;
 
         const mapa =
-        "https://maps.google.com/?q="
-        + lat + "," + lon;
-
+        "https://maps.google.com/?q=" + lat + "," + lon;
 
         const texto =
         encodeURIComponent(
-        "Hola, he encontrado a "
-        + NOMBRE +
-        ". Mi ubicación es: "
-        + mapa
+        "Hola, he encontrado a " +
+        NOMBRE +
+        ". Mi ubicación es: " +
+        mapa
         );
-
 
         window.location.href =
-        "https://wa.me/"
-        + TELEFONO +
-        "?text="
-        + texto;
+        "https://wa.me/" +
+        TELEFONO +
+        "?text=" +
+        texto;
     },
-
 
     function(){
-
-        mensaje(
-        "⚠️ No se pudo obtener la ubicación. Autoriza el GPS del navegador."
-        );
+        mensaje("⚠️ No se pudo obtener la ubicación. Autoriza el GPS del navegador.");
     },
-
 
     {
         enableHighAccuracy:true,
@@ -398,20 +357,14 @@ function enviarGPS(){
 
 }
 
-
 function mostrarSOS(){
 
     const caja =
-    document.getElementById(
-    "contactosSOS"
-    );
+    document.getElementById("contactosSOS");
 
     if(caja.style.display === "block"){
-
         caja.style.display = "none";
-
     }else{
-
         caja.style.display = "block";
     }
 }
