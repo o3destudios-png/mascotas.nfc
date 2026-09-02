@@ -26,7 +26,6 @@ body{
     border-radius:22px;
     overflow:hidden;
     box-shadow:0 8px 28px rgba(0,0,0,.12);
-    padding-top:20px;
 }
 
 .foto{
@@ -36,7 +35,7 @@ body{
     object-position:center 28%;
     border-radius:50%;
     display:block;
-    margin:0 auto 10px auto;
+    margin:20px auto 10px auto;
 }
 
 .contenido{
@@ -51,13 +50,15 @@ h1{
 .especie{
     color:#667085;
     margin-top:6px;
+    margin-bottom:18px;
 }
 
-.caja{
-    background:#f5f6f7;
+.info{
+    background:#f7f8fa;
     border-radius:14px;
-    padding:16px;
-    margin-top:14px;
+    padding:14px;
+    margin:12px 0;
+    font-size:17px;
 }
 
 .botones{
@@ -68,52 +69,94 @@ h1{
 }
 
 .boton{
-    display:block;
-    padding:15px 10px;
-    border-radius:12px;
-    text-align:center;
-    text-decoration:none;
-    font-weight:bold;
     border:0;
+    border-radius:13px;
+    padding:14px 8px;
+    font-size:15px;
+    font-weight:bold;
+    text-decoration:none;
+    text-align:center;
     cursor:pointer;
-    font-size:16px;
 }
 
-.oscuro{
+.principal{
     background:#17202a;
     color:white;
 }
 
-.claro{
-    background:#edf0f3;
+.secundario{
+    background:#eef1f4;
     color:#17202a;
 }
 
 .gps{
-    display:block;
-    width:100%;
-    margin-top:10px;
-    padding:15px;
-    border:0;
-    border-radius:12px;
-    background:#078b63;
+    grid-column:1/-1;
+    background:#087f5b;
     color:white;
-    font-size:16px;
-    font-weight:bold;
+}
+
+#mensaje{
+    display:none;
+    margin-top:12px;
+    padding:12px;
+    border-radius:12px;
+    background:#e9fbf3;
+    font-size:14px;
+}
+
+/* SOS PATITAS */
+
+.sos{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid #ddd;
+}
+
+.boton-sos{
+    width:100%;
+    border:0;
+    padding:0;
+    background:transparent;
     cursor:pointer;
 }
-    .sos-patitas{
-    display:block;
+
+.boton-sos img{
     width:100%;
-    margin-top:10px;
-    padding:15px;
-    border-radius:12px;
-    background:#17202a;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
+    display:block;
+    border-radius:18px;
+}
+
+.ayuda{
     text-align:center;
+    color:#667085;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.contactos-sos{
+    display:none;
+    margin-top:14px;
+    background:#fff5f8;
+    border:1px solid #ffcad8;
+    border-radius:16px;
+    padding:14px;
+}
+
+.contactos-sos h3{
+    margin:0 0 12px;
+    text-align:center;
+}
+
+.sos-contacto{
+    display:block;
+    padding:12px;
+    margin:8px 0;
+    border-radius:11px;
+    background:white;
+    color:#17202a;
     text-decoration:none;
+    font-weight:bold;
+    border:1px solid #eee;
 }
 
 footer{
@@ -122,6 +165,7 @@ footer{
     font-size:12px;
     margin-top:18px;
 }
+
 </style>
 </head>
 
@@ -129,7 +173,12 @@ footer{
 
 <div class="ficha">
 
-<img class="foto" src="GREY.jpg" alt="Foto de Grey">
+<img
+    class="foto"
+    src="https://o3destudios-png.github.io/mascotas.nfc/GREY/GREY.jpg"
+    alt="Foto de Grey"
+>
+
 <div class="contenido">
 
 <h1>🐾 Grey</h1>
@@ -138,40 +187,53 @@ footer{
 🐕 Especie: perro
 </div>
 
-<div class="caja">
+<div class="info">
 <strong>📞 Contacto:</strong><br>
 650 519 510
 </div>
 
-<div class="caja">
+<div class="info">
 💬 Es sociable con gente.<br>
 <strong>⚠️ NO APTA con otros perros ni con gatos.</strong>
 </div>
 
 <div class="botones">
 
-<a class="boton oscuro" href="tel:+34650519510">
+<a
+class="boton principal"
+href="tel:+34650519510">
 📞 Llamar
 </a>
 
-<a class="boton oscuro"
-href="https://wa.me/34650519510?text=Hola%2C%20he%20encontrado%20a%20Grey.">
+<a
+class="boton principal"
+href="https://wa.me/34650519510?text=Hola%2C%20he%20encontrado%20a%20Grey."
+target="_blank">
 💬 WhatsApp
 </a>
 
-<a class="boton claro" href="sms:+34650519510">
+<a
+class="boton secundario"
+href="sms:+34650519510?body=Hola%2C%20he%20encontrado%20a%20Grey.">
 ✉️ SMS
 </a>
 
-<button class="boton claro" onclick="copiarTelefono()">
+<button
+class="boton secundario"
+onclick="copiarTelefono()">
 📋 Copiar teléfono
+</button>
+
+<button
+class="boton gps"
+onclick="enviarGPS()">
+📍 Enviar ubicación GPS
 </button>
 
 </div>
 
-<button class="gps" onclick="enviarUbicacion()">
-📍 Enviar ubicación GPS
-</button>
+<div id="mensaje"></div>
+
 <div class="sos">
 
 <button
@@ -193,6 +255,36 @@ id="contactosSOS"
 class="contactos-sos">
 
 <h3>🐾 SOS Patitas Ilicitanas</h3>
+
+<a
+class="sos-contacto"
+href="tel:+34651805369">
+📞 Estrella · 651 80 53 69
+</a>
+
+<a
+class="sos-contacto"
+href="tel:+34622684584">
+📞 Laura · 622 68 45 84
+</a>
+
+<a
+class="sos-contacto"
+href="mailto:sospatitasilicitanas@hotmail.com">
+✉️ sospatitasilicitanas@hotmail.com
+</a>
+
+<a
+class="sos-contacto"
+href="https://www.teaming.net/sospatitasilicitanas"
+target="_blank">
+🔗 Teaming SOS Patitas Ilicitanas
+</a>
+
+</div>
+
+</div>
+
 <footer>
 Identificación NFC · O3D Estudios
 </footer>
@@ -201,27 +293,113 @@ Identificación NFC · O3D Estudios
 </div>
 
 <script>
-function copiarTelefono(){
-    navigator.clipboard.writeText("650519510");
-    alert("Teléfono copiado");
+
+const NOMBRE = "Grey";
+const TELEFONO = "34650519510";
+
+function mensaje(texto){
+
+    const caja =
+    document.getElementById("mensaje");
+
+    caja.innerText = texto;
+    caja.style.display = "block";
 }
 
-function enviarUbicacion(){
-    navigator.geolocation.getCurrentPosition(function(pos){
+async function copiarTelefono(){
+
+    try{
+
+        await navigator.clipboard.writeText(
+        "+34 650 519 510"
+        );
+
+        mensaje("✅ Teléfono copiado");
+
+    }catch{
+
+        mensaje(
+        "📞 +34 650 519 510"
+        );
+    }
+}
+
+function enviarGPS(){
+
+    if(!navigator.geolocation){
+
+        mensaje(
+        "Este móvil no permite obtener la ubicación."
+        );
+
+        return;
+    }
+
+    mensaje(
+    "📍 Solicitando permiso de ubicación..."
+    );
+
+    navigator.geolocation.getCurrentPosition(
+
+    function(posicion){
+
+        const lat =
+        posicion.coords.latitude;
+
+        const lon =
+        posicion.coords.longitude;
 
         const mapa =
-        "https://maps.google.com/?q=" +
-        pos.coords.latitude + "," +
-        pos.coords.longitude;
+        "https://maps.google.com/?q="
+        + lat + "," + lon;
 
-        const mensaje =
-        "Hola, he encontrado a Grey. Mi ubicación es: " + mapa;
+        const texto =
+        encodeURIComponent(
+        "Hola, he encontrado a "
+        + NOMBRE +
+        ". Mi ubicación es: "
+        + mapa
+        );
 
         window.location.href =
-        "https://wa.me/34650519510?text=" +
-        encodeURIComponent(mensaje);
+        "https://wa.me/"
+        + TELEFONO +
+        "?text="
+        + texto;
+    },
+
+    function(){
+
+        mensaje(
+        "⚠️ No se pudo obtener la ubicación. Autoriza el GPS del navegador."
+        );
+    },
+
+    {
+        enableHighAccuracy:true,
+        timeout:12000,
+        maximumAge:30000
     });
+
 }
+
+function mostrarSOS(){
+
+    const caja =
+    document.getElementById(
+    "contactosSOS"
+    );
+
+    if(caja.style.display === "block"){
+
+        caja.style.display = "none";
+
+    }else{
+
+        caja.style.display = "block";
+    }
+}
+
 </script>
 
 </body>
