@@ -174,10 +174,9 @@ footer{
 <div class="ficha">
 
 <img
-    class="foto"
-    src="https://o3destudios-png.github.io/mascotas.nfc/GREY/GREY.jpg"
-    alt="Foto de Grey"
->
+class="foto"
+src="https://o3destudios-png.github.io/mascotas.nfc/GREY/GREY.jpg"
+alt="Foto de Grey">
 
 <div class="contenido">
 
@@ -207,14 +206,14 @@ href="tel:+34650519510">
 
 <a
 class="boton principal"
-href="https://wa.me/34650519510?text=Hola%2C%20he%20encontrado%20a%20Grey."
+href="https://wa.me/34650519510?text=Hola%2C%20he%20encontrado%20a%20Grey.%20He%20accedido%20a%20sus%20datos%20mediante%20su%20identificacion%20NFC.%20Me%20pongo%20en%20contacto%20contigo%20para%20ayudarte%20a%20recuperarlo."
 target="_blank">
 💬 WhatsApp
 </a>
 
 <a
 class="boton secundario"
-href="sms:+34650519510?body=Hola%2C%20he%20encontrado%20a%20Grey.">
+href="sms:+34650519510?body=Hola%2C%20he%20encontrado%20a%20Grey.%20He%20accedido%20a%20sus%20datos%20mediante%20su%20identificacion%20NFC.%20Me%20pongo%20en%20contacto%20contigo%20para%20ayudarte%20a%20recuperarlo.">
 ✉️ SMS
 </a>
 
@@ -298,10 +297,7 @@ const NOMBRE = "Grey";
 const TELEFONO = "34650519510";
 
 function mensaje(texto){
-
-    const caja =
-    document.getElementById("mensaje");
-
+    const caja = document.getElementById("mensaje");
     caja.innerText = texto;
     caja.style.display = "block";
 }
@@ -309,70 +305,49 @@ function mensaje(texto){
 async function copiarTelefono(){
 
     try{
-
-        await navigator.clipboard.writeText(
-        "+34 650 519 510"
-        );
-
+        await navigator.clipboard.writeText("+34 650 519 510");
         mensaje("✅ Teléfono copiado");
-
     }catch{
-
-        mensaje(
-        "📞 +34 650 519 510"
-        );
+        mensaje("📞 +34 650 519 510");
     }
 }
 
 function enviarGPS(){
 
     if(!navigator.geolocation){
-
-        mensaje(
-        "Este móvil no permite obtener la ubicación."
-        );
-
+        mensaje("Este móvil no permite obtener la ubicación.");
         return;
     }
 
-    mensaje(
-    "📍 Solicitando permiso de ubicación..."
-    );
+    mensaje("📍 Solicitando permiso de ubicación...");
 
     navigator.geolocation.getCurrentPosition(
 
     function(posicion){
 
-        const lat =
-        posicion.coords.latitude;
-
-        const lon =
-        posicion.coords.longitude;
+        const lat = posicion.coords.latitude;
+        const lon = posicion.coords.longitude;
 
         const mapa =
-        "https://maps.google.com/?q="
-        + lat + "," + lon;
+        "https://maps.google.com/?q=" + lat + "," + lon;
 
         const texto =
         encodeURIComponent(
-        "Hola, he encontrado a "
-        + NOMBRE +
-        ". Mi ubicación es: "
-        + mapa
+        "Hola, he encontrado a " +
+        NOMBRE +
+        ". Mi ubicación es: " +
+        mapa
         );
 
         window.location.href =
-        "https://wa.me/"
-        + TELEFONO +
-        "?text="
-        + texto;
+        "https://wa.me/" +
+        TELEFONO +
+        "?text=" +
+        texto;
     },
 
     function(){
-
-        mensaje(
-        "⚠️ No se pudo obtener la ubicación. Autoriza el GPS del navegador."
-        );
+        mensaje("⚠️ No se pudo obtener la ubicación. Autoriza el GPS del navegador.");
     },
 
     {
@@ -386,16 +361,11 @@ function enviarGPS(){
 function mostrarSOS(){
 
     const caja =
-    document.getElementById(
-    "contactosSOS"
-    );
+    document.getElementById("contactosSOS");
 
     if(caja.style.display === "block"){
-
         caja.style.display = "none";
-
     }else{
-
         caja.style.display = "block";
     }
 }
