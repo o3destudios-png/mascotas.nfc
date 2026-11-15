@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b38">
+<title>Migajas · Identificación NFC O3D Store</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:18px;background:#eef3f9;font-family:Arial,Helvetica,sans-serif;color:#142238}
+.ficha{max-width:520px;margin:auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.cabecera{background:#071b38;color:#fff;text-align:center;padding:17px 14px;border-bottom:5px solid #168de0}
+.marca{font-weight:900;font-size:23px;letter-spacing:1px}.marca span{color:#1596ee}
+.submarca{font-size:12px;letter-spacing:1.4px;margin-top:5px;color:#dbeafe}
+.foto{width:220px;height:220px;object-fit:cover;object-position:center 28%;border-radius:50%;display:block;margin:20px auto 10px;border:5px solid #168de0}
+.contenido{padding:18px 20px 22px}
+h1{margin:0;text-align:center;font-size:34px;color:#082653;text-transform:uppercase}
+.especie{text-align:center;color:#64748b;margin:5px 0 18px}
+.info{background:#f3f7fc;border:1px solid #dbeafe;border-left:4px solid #168de0;border-radius:14px;padding:13px;margin:12px 0;font-size:16px;line-height:1.45}
+.info strong{color:#082653}
+.titulo{font-weight:800;color:#082653;margin-bottom:5px}
+.botones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.boton{border:0;border-radius:13px;padding:14px 8px;font-size:15px;font-weight:bold;text-decoration:none;text-align:center;cursor:pointer;display:block}
+.principal{background:#082653;color:white}
+.secundario{background:#eaf1f9;color:#082653}
+.gps{grid-column:1/-1;background:#087f5b;color:white}
+#mensaje{display:none;margin-top:12px;padding:12px;border-radius:12px;background:#e9fbf3;font-size:14px;line-height:1.4}
+.comunicado{background:#fff8e8;border:1px solid #f5d48b;border-radius:15px;padding:15px;margin-top:18px;line-height:1.5}
+.comunicado h2{font-size:18px;color:#082653;margin:0 0 8px}
+.sos{margin-top:20px;padding-top:18px;border-top:1px solid #d7e0eb}
+.boton-sos{width:100%;border:0;padding:0;background:transparent;cursor:pointer}
+.boton-sos img{width:100%;display:block;border-radius:18px}
+.ayuda{text-align:center;color:#64748b;font-size:13px;margin-top:7px}
+.contactos-sos{display:none;margin-top:14px;background:#fff5f8;border:1px solid #ffcad8;border-radius:16px;padding:14px}
+.contactos-sos h3{margin:0 0 12px;text-align:center}
+.sos-contacto{display:block;padding:12px;margin:8px 0;border-radius:11px;background:white;color:#17202a;text-decoration:none;font-weight:bold;border:1px solid #eee}
+footer{text-align:center;color:#64748b;font-size:12px;margin-top:18px}
+@media(max-width:380px){.contenido{padding:15px}.boton{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="ficha">
+<header class="cabecera"><div class="marca">O<span>3D</span> STORE</div><div class="submarca">IDENTIFICACIÓN NFC DE MASCOTAS</div></header>
+<img class="foto" src="MIGAJAS.png" alt="Fotografía de Migajas">
+<div class="contenido">
+<h1>🐾 Migajas</h1>
+<div class="especie">🐕 Especie: perro</div>
+<div class="info"><div class="titulo">📞 Contacto familiar</div><strong>Lucía Escolano Bru</strong><br><a href="tel:+34617216762" style="color:#0876c9;font-weight:800;text-decoration:none">+34 617 216 762</a><br>Segundo teléfono: <a href="tel:+34647861965" style="color:#0876c9;font-weight:800;text-decoration:none">+34 647 86 19 65</a></div>
+<div class="info"><div class="titulo">💙 Comportamiento y sociabilidad</div>Migajas es muy miedoso con las personas, pero no es reactivo. Responde bien a los premios y al juego. Acércate con calma, sin movimientos bruscos y deja que sea él quien se acerque.</div>
+<div class="info"><div class="titulo">🩺 Salud</div>Medicación: ninguna.<br>Alergias: ninguna conocida.</div>
+<div class="botones">
+<a class="boton principal" href="tel:+34617216762">📞 Llamar a Lucía</a>
+<a class="boton principal" href="https://wa.me/34617216762?text=Hola%2C%20he%20encontrado%20a%20Migajas%20y%20he%20accedido%20a%20su%20ficha%20NFC.%20Quiero%20ayudar%20a%20que%20vuelva%20a%20casa.">💬 WhatsApp</a>
+<a class="boton secundario" href="sms:+34617216762?body=Hola%2C%20he%20encontrado%20a%20Migajas.%20Me%20pongo%20en%20contacto%20para%20ayudar%20a%20que%20vuelva%20a%20casa.">✉️ SMS</a>
+<button class="boton secundario" onclick="copiarTelefono()">📋 Copiar teléfono</button>
+<button class="boton gps" onclick="enviarGPS()">📍 Compartir mi ubicación GPS</button>
+</div>
+<div id="mensaje" role="status" aria-live="polite"></div>
+<div class="comunicado">
+<h2>¡Hola! Soy Migajas 🐾</h2>
+Si me has encontrado, por favor, no me persigas, no me grites ni intentes agarrarme bruscamente: puedo asustarme y salir corriendo. Soy muy miedoso con las personas, aunque no soy reactivo.<br><br>
+Acércate despacio y con tranquilidad. Si tienes algún premio o puedes ofrecerme un poco de juego, eso puede ayudarme a confiar. Si puedes, mantenme localizado y avisa a mi familia. ¡Muchas gracias por ayudarme a volver a casa! ❤️
+</div>
+<div class="sos">
+<button class="boton-sos" onclick="mostrarSOS()"><img src="../assets/sos-patitas-boton.png" alt="SOS Patitas Ilicitanas"></button>
+<div class="ayuda">🐾 Protectora colaboradora · Pulsa para ver los contactos</div>
+<div id="contactosSOS" class="contactos-sos">
+<h3>🐾 SOS Patitas Ilicitanas</h3>
+<a class="sos-contacto" href="tel:+34651805369">📞 Estrella · 651 80 53 69</a>
+<a class="sos-contacto" href="tel:+34622684584">📞 Laura · 622 68 45 84</a>
+<a class="sos-contacto" href="mailto:sospatitasilicitanas@hotmail.com">✉️ sospatitasilicitanas@hotmail.com</a>
+<a class="sos-contacto" href="https://www.teaming.net/sospatitasilicitanas" target="_blank" rel="noopener">🔗 Teaming SOS Patitas Ilicitanas</a>
+</div>
+</div>
+<footer>Identificación NFC · O3D Store</footer>
+</div>
+</div>
+<script>
+const NOMBRE="Migajas";
+const TELEFONO="34617216762";
+function mensaje(texto){const caja=document.getElementById("mensaje");caja.textContent=texto;caja.style.display="block";}
+async function copiarTelefono(){try{await navigator.clipboard.writeText("+34 617 216 762");mensaje("✅ Teléfono copiado.");}catch{mensaje("📞 +34 617 216 762");}}
+function enviarGPS(){
+ if(!navigator.geolocation){mensaje("Este móvil no permite obtener la ubicación.");return;}
+ mensaje("📍 Solicitando permiso para compartir tu ubicación...");
+ navigator.geolocation.getCurrentPosition(pos=>{
+  const mapa="https://maps.google.com/?q="+pos.coords.latitude+","+pos.coords.longitude;
+  const texto=encodeURIComponent("Hola, he encontrado a "+NOMBRE+". Mi ubicación es: "+mapa);
+  window.location.href="https://wa.me/"+TELEFONO+"?text="+texto;
+ },()=>mensaje("⚠️ No se pudo obtener la ubicación. Comprueba los permisos de GPS del navegador."),{enableHighAccuracy:true,timeout:12000,maximumAge:30000});
+}
+function mostrarSOS(){const caja=document.getElementById("contactosSOS");caja.style.display=caja.style.display==="block"?"none":"block";}
+</script>
+</body>
+</html>
