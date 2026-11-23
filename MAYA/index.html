@@ -50,7 +50,7 @@ Esta ficha contiene información importante para ayudarme a volver con mi famili
 <a class="boton secundario" href="sms:+34678685785?body=Hola%2C%20he%20encontrado%20a%20Maya.">✉️ SMS a Paco</a>
 <a class="boton secundario" href="sms:+34667824840?body=Hola%2C%20he%20encontrado%20a%20Maya.">✉️ SMS a Judith</a>
 <button class="boton secundario" onclick="copiarTelefono()">📋 Copiar teléfono</button>
-<button class="boton gps" onclick="enviarGPS()">📍 Compartir mi ubicación GPS</button>
+<button class="boton gps" onclick="enviarGPS()">📍 Compartir mi ubicación GPS</button><div id="gpsContactos" style="display:none;width:100%;gap:10px;flex-direction:column;margin-top:10px"></div>
 </div><div id="mensaje" role="status" aria-live="polite"></div>
 <div class="sos"><button class="boton-sos" onclick="mostrarSOS()"><img src="../assets/sos-patitas-boton.png" alt="SOS Patitas Ilicitanas"></button>
 <div class="ayuda">🐾 Protectora colaboradora · Pulsa para ver los contactos</div>
@@ -61,9 +61,9 @@ Esta ficha contiene información importante para ayudarme a volver con mi famili
 <a class="sos-contacto" href="https://www.teaming.net/sospatitasilicitanas" target="_blank" rel="noopener">🔗 Teaming SOS Patitas Ilicitanas</a></div></div>
 <footer>Identificación NFC · O3D Store</footer></div></div>
 <script>
-const NOMBRE="Maya", TELEFONO="+34667824840";
+const NOMBRE="Maya", TELEFONOS=[{nombre:"Judith",numero:"34667824840"},{nombre:"Paco",numero:"34678685785"}];
 function mensaje(t){const e=document.getElementById("mensaje");e.textContent=t;e.style.display="block"}
 async function copiarTelefono(){try{await navigator.clipboard.writeText("+34667824840");mensaje("✅ Teléfono copiado")}catch{mensaje("📞 +34667824840")}}
-function enviarGPS(){if(!navigator.geolocation){mensaje("Este móvil no permite obtener la ubicación.");return}mensaje("📍 Solicitando permiso para compartir tu ubicación...");navigator.geolocation.getCurrentPosition(p=>{const mapa="https://maps.google.com/?q="+p.coords.latitude+","+p.coords.longitude;const texto=encodeURIComponent("Hola, he encontrado a "+NOMBRE+". Mi ubicación es: "+mapa);window.location.href="https://wa.me/"+TELEFONO.replace(/\D/g,"")+"?text="+texto},()=>mensaje("⚠️ No se pudo obtener la ubicación. Comprueba los permisos de GPS."),{enableHighAccuracy:true,timeout:12000,maximumAge:30000})}
+function enviarGPS(){if(!navigator.geolocation){mensaje("Este móvil no permite obtener la ubicación.");return}mensaje("📍 Solicitando permiso para compartir la ubicación...");navigator.geolocation.getCurrentPosition(p=>{const mapa="https://maps.google.com/?q="+p.coords.latitude+","+p.coords.longitude;const texto=encodeURIComponent("Hola, he encontrado a "+NOMBRE+". Mi ubicación GPS es: "+mapa);const zona=document.getElementById("gpsContactos");zona.innerHTML=TELEFONOS.map(t=>`<a class="boton principal" href="https://wa.me/${t.numero}?text=${texto}" target="_blank" rel="noopener">📍 Enviar ubicación a ${t.nombre} por WhatsApp</a>`).join("");zona.style.display="flex";mensaje("✅ Ubicación obtenida. Pulsa los dos botones para enviarla a Judith y a Paco por WhatsApp.");},()=>mensaje("⚠️ No se pudo obtener la ubicación. Comprueba los permisos de GPS."),{enableHighAccuracy:true,timeout:12000,maximumAge:30000})}
 function mostrarSOS(){const e=document.getElementById("contactosSOS");e.style.display=e.style.display==="block"?"none":"block"}
 </script></body></html>
